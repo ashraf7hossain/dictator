@@ -12,6 +12,10 @@ abstract class RemoteWordState extends Equatable {
   List<Object> get props => [word!, exception!];
 }
 
+class RemoteWordInitial extends RemoteWordState {
+  const RemoteWordInitial();
+}
+
 class RemoteWordLoading extends RemoteWordState {
   const RemoteWordLoading();
 }

@@ -102,10 +102,13 @@ class MeaningModel extends Meaning {
 }
 
 class DefinitionModel extends Definition {
+  final String? example; // Optional property
+
   const DefinitionModel({
     required String definition,
     required List<String> synonyms,
     required List<String> antonyms,
+    this.example, // Add optional property
   }) : super(definition: definition, synonyms: synonyms, antonyms: antonyms);
 
   factory DefinitionModel.fromJson(Map<String, dynamic> json) {
@@ -113,6 +116,7 @@ class DefinitionModel extends Definition {
       definition: json['definition'] ?? '',
       synonyms: List<String>.from(json['synonyms'] ?? []),
       antonyms: List<String>.from(json['antonyms'] ?? []),
+      example: json['example'], // Deserialize optional property
     );
   }
 
@@ -121,6 +125,7 @@ class DefinitionModel extends Definition {
       'definition': definition,
       'synonyms': synonyms,
       'antonyms': antonyms,
+      if (example != null) 'example': example, // Include optional property if it exists
     };
   }
 }

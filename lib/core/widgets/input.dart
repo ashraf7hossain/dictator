@@ -10,6 +10,7 @@ class CustomInputField extends StatelessWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final VoidCallback? onSuffixIconTap;
+  final ValueChanged? onChanged;
   final int maxLines;
 
   const CustomInputField({
@@ -24,6 +25,7 @@ class CustomInputField extends StatelessWidget {
     this.suffixIcon,
     this.onSuffixIconTap,
     this.maxLines = 1,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class CustomInputField extends StatelessWidget {
           obscureText: isPassword,
           maxLines: maxLines,
           validator: validator,
+          onChanged: onChanged,
           decoration: InputDecoration(
             hintText: placeholder,
             prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,

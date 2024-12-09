@@ -61,13 +61,15 @@ class Definition extends Equatable {
   final String definition;
   final List<String> synonyms;
   final List<String> antonyms;
+  final String? example; // Optional property
 
   const Definition({
     required this.definition,
     required this.synonyms,
     required this.antonyms,
+    this.example, // Add optional property
   });
 
   @override
-  List<Object?> get props => [definition, synonyms, antonyms];
+  List<Object?> get props => [definition, synonyms, antonyms, example];
 }
