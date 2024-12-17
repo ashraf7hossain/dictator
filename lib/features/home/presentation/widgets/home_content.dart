@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapp/core/extensions/string.dart';
@@ -21,7 +22,35 @@ class HomeContent extends StatelessWidget {
       } else if (state is RemoteWordSuccess) {
         return WordContent(word: state.word![0]);
       } else if (state is RemoteWordFailed) {
-        return Text(state.exception.toString());
+        if (state.exception is DioException) {
+          final dioError = state.exception as DioException;
+          if (dioError.response?.statusCode == 404) {
+            return const Text(
+              'Word not found',
+              style: TextStyle(
+                color: Colors.red, // Customize the color as needed
+                fontSize: 16,
+              ),
+            );
+          } else {
+            return const Text(
+              'Something went wrong',
+              style: TextStyle(
+                color: Colors.grey, // Customize the color as needed
+                fontSize: 16,
+              ),
+            );
+          }
+        } else {
+          // Handle other exceptions (e.g., network errors, timeout errors)
+          return const Text(
+            'An unexpected error occurred',
+            style: TextStyle(
+              color: Colors.grey, // Customize the color as needed
+              fontSize: 16,
+            ),
+          );
+        }
       } else {
         return const Text("Something went wrong");
       }
